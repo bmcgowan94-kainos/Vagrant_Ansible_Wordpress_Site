@@ -9,7 +9,7 @@ hosts = [
 
 groups = {
     # Logically group the servers for use in 'site.yml'
-    "webservers" => ["preview-proxy01"],
+    "webserver" => ["preview-proxy01"],
     "wordpress" => ["preview-wordpress01"]
 }
 
