@@ -1,0 +1,16 @@
+---
+# This block installs the specified roles to all hosts 
+- hosts: all
+  become: true
+  roles:
+  - geerlingguy.repo-epel
+
+# This block only installs the specified roles to the hosts within 'tag_Role_webserver'
+- name: Install lamp stack on webservers (proxys)
+  hosts:
+    - webserver
+  become: true
+  roles:
+  - geerlingguy.mysql
+  - geerlingguy.apache
+  - geerlingguy.php

@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+hosts = [
+    # Preview hosts, 1 proxy and 1 wordpress host
+    {name: 'preview-proxy01', ip: '10.122.1.2', memory: '512', cpu: '2', hostname: 'preview-proxy01.local', disk: "false"},
+    {name: 'preview-wordpress01', ip: '10.122.2.4', memory: '512', cpu: '2', hostname: 'preview-wordpress01.local', disk: "true"}
+  ]
+
+groups = {
+    # Logically group the servers for use in 'site.yml'
+    "webservers" => ["preview-proxy01"],
+    "wordpress" => ["preview-wordpress01"]
+}
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure relates to the configuration version 
+Vagrant.configure("2") do |config|
+  # Configure the box type to be centos7
+  hosts.each do |host|
+    config.vm.define host[:name] do |c|
+      c.vm.box = "centos/7"
+      c.vm.hostname = host[:hostname]
+      c.vm.network  "private_network",ip: host[:ip] ,netmask: "255.255.0.0"
+  
+      # Tell vagrant to use Ansible as the provisioner
+      config.vm.provision "ansible" do |ansible|
+        # Set site.yml as the primary/master playbook
+        ansible.playbook = "site.yml"
+        ansible.groups = groups
+      end
+      
+      config.vm.provider "virtualbox" do |v|
+        # Set virtualbox as the local provider and name the VM as shown on VB
+        # v.name = "Brians VM"
+      end
+    
+    end
+
+  end
+ 
+end

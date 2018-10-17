@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/Users/brianmc/Documents/kainos_projects/Vagrant_Ansible_example/ansible","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
