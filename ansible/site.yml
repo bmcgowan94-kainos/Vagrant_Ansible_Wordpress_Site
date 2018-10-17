@@ -16,7 +16,7 @@
   - geerlingguy.apache
   - geerlingguy.php
 
-# Install NGINX on webserver for hosting the site
+# Install NGINX on webserver/proxy for hosting the site
 - name: Install NGINX on webserver 
   hosts:
     - webserver
