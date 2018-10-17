@@ -1,0 +1,2 @@
+# Ansible files for git to ignore
+**/roles_galaxy/*
