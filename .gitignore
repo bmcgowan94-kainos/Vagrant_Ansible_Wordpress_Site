@@ -1,0 +1,10 @@
+# Vagrant temp files to ignore
+*.vagrant
+*.vagrant.*
+**/.vagrant
+
+# Ansible files to ignore
+*.retry
+*.retry.*
+**/roles_galaxy/*
+*.vault_pass

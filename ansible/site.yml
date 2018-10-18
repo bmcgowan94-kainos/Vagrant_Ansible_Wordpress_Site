@@ -5,12 +5,21 @@
   roles:
   - geerlingguy.repo-epel
 
-# This block only installs the specified roles to the hosts within 'tag_Role_webserver'
-- name: Install lamp stack on webservers (proxys)
+# This block installs the specified roles to the hosts within 'wordpress'
+# A LAMP stack is a suite of programs that is typically required to run a wordpress site on a server
+- name: Install lamp stack on wordpress server
   hosts:
-    - webserver
+    - wordpress
   become: true
   roles:
   - geerlingguy.mysql
   - geerlingguy.apache
   - geerlingguy.php
+
+# Install NGINX on webserver/proxy for hosting the site
+- name: Install NGINX on webserver 
+  hosts:
+    - webserver
+  become: true
+  roles:
+  - geerlingguy.nginx

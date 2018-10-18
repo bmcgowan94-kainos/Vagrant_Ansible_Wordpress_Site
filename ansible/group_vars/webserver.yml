@@ -1,0 +1,33 @@
+---
+#Group vars for  webservers
+
+#Firewall Config
+
+firewall_allowed_tcp_ports:
+  - "22"
+  - "80"
+  - "10050"
+  - "10051"
+
+nginx_remove_default_vhost: true
+
+
+# nginx vhost
+
+nginx_vhosts:
+  - listen: "80 default_server"
+    server_name: "preview.woabelfast.co.uk"
+    root: "/usr/share/nginx/preview.woabelfast.co.uk"
+    index: "index.html index.htm"
+    access_log: "/var/log/nginx/preview.access.log"
+    error_log: "/var/log/nginx/preview.error.log"
+    extra_parameters: |
+        location / {
+          proxy_pass http://172.17.2.250;
+          proxy_set_header Host      $host;
+          proxy_set_header X-Real-IP $remote_addr;
+        }
+        location /elb_status {
+          access_log off;
+          return 200;
+        }
